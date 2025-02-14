@@ -1,0 +1,56 @@
+services:
+  database:
+    build:
+      context: ./DB
+    container_name: db-cont
+    environment:
+      - MYSQL_ROOT_PASSWORD=bhavs123
+      - MYSQL_DATABASE=chatapp_db
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - chatappnet
+
+  backend:
+    build:
+      context: ./BE
+    container_name: backend-cont
+    environment:
+      - DATABASE_HOST=db-cont  # Name of the database container
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=bhavs123
+      - DATABASE_NAME=chatapp_db
+    volumes:
+      - backend-data:/myChatapp
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+    networks:
+      - chatappnet
+    restart: always
+
+  frontend:
+    build:
+      context: ./FE
+    container_name: frontend-cont
+    volumes:
+      - frontend-data:/usr/share/nginx/html
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - chatappnet
+    restart: always
+
+volumes:
+  db-data:
+  backend-data:
+  frontend-data:
+
+networks:
+  chatappnet:
+    driver: bridge
