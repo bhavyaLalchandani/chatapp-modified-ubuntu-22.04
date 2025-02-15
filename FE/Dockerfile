@@ -4,7 +4,7 @@ FROM ubuntu:22.04
 RUN apt-get update && apt-get install -y nginx && apt-get clean
 
 # Copy the Nginx configuration file
-COPY chatapp.conf /etc/nginx/sites-available/chatapp.conf
+COPY FE/chatapp.conf /etc/nginx/sites-available/chatapp.conf
 
 # Create a symbolic link in sites-enabled
 RUN ln -s /etc/nginx/sites-available/chatapp.conf /etc/nginx/sites-enabled/
