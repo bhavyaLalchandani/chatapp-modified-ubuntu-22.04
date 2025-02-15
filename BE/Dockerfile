@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 # Update the package list and install required dependencies
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip python3-dev default-libmysqlclient-dev build-essential && \
+    apt-get install -y python3 python3-pip python3-dev default-libmysqlclient-dev build-essential git && \
     apt-get clean
 
 # Create the directory for your app
