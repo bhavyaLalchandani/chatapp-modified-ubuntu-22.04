@@ -11,7 +11,7 @@ RUN apt-get update && \
 # Copy your Django app into the container
 # COPY my-chatapp /myChatapp
 
-RUN git clone https://github.com/bhavyaLalchandani/chatapp-modified-ubuntu-22.04 /myChatapp
+RUN git clone https://github.com/bhavyaLalchandani/chatapp-modified-ubuntu-22.04.git /myChatapp
 
 # Set the working directory for your app in the container
 WORKDIR /myChatapp
